@@ -5,7 +5,9 @@ class StocksController < ApplicationController
         params[:stock]
       )
       if @stock
-        render 'users/my_portfolio'
+        respond_to do |format|
+          format.js { render partial: 'users/result' }
+        end
       else
         flash[:danger] = 'You have entered incorrect symbol'
         redirect_to my_portfolio_path
